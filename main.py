@@ -86,6 +86,16 @@ def write_db(db, filename):
         file.write("".join(data))
 
 
+def medium_age(db):
+    i = 0
+    ageSum = 0
+    for contact in db:
+        i = i + 1
+        ageSum = ageSum + int(contact[3])
+    medAge = ageSum / i
+    return medAge
+
+
 def add(db):
     print("\n")
     print("You are trying to add contact.")
@@ -119,6 +129,9 @@ def edit(db):
 def print_db(db):
     print("\n")
     print(tabulate(db, headers=["Index", "Name", "Phone", "Age", "Email"]))
+    print("\n")
+    medAge = round(medium_age(db))
+    print(f"\tMedium age is {medAge}.")
     print("\n")
 
 
