@@ -1,13 +1,12 @@
 import copy
 
 import regex as re
-from tabulate import tabulate
-
+from tabulate import tabulate  # Library that helps to
 
 filename = "contacts.txt"
 
 
-def check_name():
+def check_name():  # Checking name input
     while True:
         name = input("Name: ")
         if re.match(r'^[\p{L} ]+$', name, re.U):
@@ -17,7 +16,7 @@ def check_name():
     return name
 
 
-def check_phone():
+def check_phone():  # Checking phone input
     while True:
         phone = input("Phone: ")
         if re.match(r'^[+]?(372[ ]?)?[2-7]([ ]?[0-9]){6,7}$', phone):
@@ -27,7 +26,7 @@ def check_phone():
     return phone
 
 
-def check_age():
+def check_age():  # Checking age input
     while True:
         age = input("Age: ")
         if age.isnumeric():
@@ -37,7 +36,7 @@ def check_age():
     return age
 
 
-def check_email():
+def check_email():  # Checking email input
     while True:
         email = input("Email: ")
         if re.match(r'^[\w\d.]+@[\w\d]+\.[\w\d]+$', email):
@@ -47,7 +46,7 @@ def check_email():
     return email
 
 
-def check_index(maxLen):
+def check_index(maxLen):  # Checking index input
     while True:
         index = input("Index of contact: ")
         if index.isnumeric():
@@ -63,7 +62,7 @@ def check_index(maxLen):
     return index
 
 
-def read_db(filename):
+def read_db(filename):  # Reading db from file
     with open(filename, "r", encoding='utf-8') as file:
         data = file.readlines()
         db = []
@@ -76,7 +75,7 @@ def read_db(filename):
         return db
 
 
-def write_db(db, filename):
+def write_db(db, filename):  # Writing db to file
     with open(filename, "w", encoding='utf-8') as file:
         data = []
         database = copy.deepcopy(db)
@@ -86,7 +85,7 @@ def write_db(db, filename):
         file.write("".join(data))
 
 
-def medium_age(db):
+def medium_age(db):  # Calculating medium age
     i = 0
     ageSum = 0
     for contact in db:
@@ -96,7 +95,7 @@ def medium_age(db):
     return medAge
 
 
-def add(db):
+def add(db):  # Adding contact
     print("\n")
     print("You are trying to add contact.")
     name = check_name()
@@ -109,7 +108,7 @@ def add(db):
     write_db(db, filename)
 
 
-def edit(db):
+def edit(db):  # Editing contact
     print("You are trying to edit contact.")
     print_db(db)
     index = check_index(len(db))
@@ -126,7 +125,8 @@ def edit(db):
         contact[4] = check_email()
     write_db(db, filename)
 
-def print_db(db):
+
+def print_db(db):  # Printing database
     print("\n")
     print(tabulate(db, headers=["Index", "Name", "Phone", "Age", "Email"]))
     print("\n")
@@ -135,7 +135,7 @@ def print_db(db):
     print("\n")
 
 
-def print_menu():
+def print_menu():  # Printing menu
     print("1. List contacts")
     print("2. Add contact")
     print("3. Edit contact")
@@ -155,7 +155,7 @@ def main():
             add(db)
         elif inpt == "3":
             edit(db)
-        elif inpt == "4":
+        elif inpt == "4":  # Deliting contact
             print("You are trying to delete contact.")
             index = check_index(len(db))
             db.pop(index)
@@ -163,7 +163,6 @@ def main():
 
         print_menu()
         inpt = str(input("Chose action: "))
-
 
 
 if __name__ == '__main__':
