@@ -13,7 +13,7 @@ def check_name():
         if re.match(r'^[\p{L} ]+$', name, re.U):
             break
         else:
-            print("Name must have only letters and spaces")
+            print("Name must have only letters and spaces.")
     return name
 
 
@@ -23,7 +23,7 @@ def check_phone():
         if re.match(r'^[+]?(372[ ]?)?[2-7]([ ]?[0-9]){6,7}$', phone):
             break
         else:
-            print("Not a phone number")
+            print("Not a phone number.")
     return phone
 
 
@@ -33,7 +33,7 @@ def check_age():
         if age.isnumeric():
             break
         else:
-            print("Age must be a number")
+            print("Age must be a number.")
     return age
 
 
@@ -43,21 +43,23 @@ def check_email():
         if re.match(r'^[\w\d.]+@[\w\d]+\.[\w\d]+$', email):
             break
         else:
-            print("Not email")
+            print("Not email.")
     return email
 
 
 def check_index(maxLen):
     while True:
-        index = input("Index of contact")
+        index = input("Index of contact: ")
         if index.isnumeric():
             index = int(index)
         else:
-            print("Index must be number")
+            print("Index must be number.")
+            continue
         if index < maxLen:
             break
         else:
-            print("Index is lager than amount of contacts")
+            print("Index is lager than amount of contacts.")
+            continue
     return index
 
 
@@ -93,7 +95,6 @@ def add(db):
     email = check_email()
     index = int(db[-1][0]) + 1
     contact = [index, name, phone, age, email]
-    print(contact)
     db.append(contact)
     write_db(db, filename)
 
