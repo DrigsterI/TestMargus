@@ -1,3 +1,5 @@
+import copy
+
 import regex as re
 from tabulate import tabulate
 
@@ -75,11 +77,10 @@ def read_db(filename):
 def write_db(db, filename):
     with open(filename, "w", encoding='utf-8') as file:
         data = []
-        print(db)
-        for contact in db:
+        database = copy.deepcopy(db)
+        for contact in database:
             contact.pop(0)
             data.append(", ".join(contact) + "\n")
-        print(db)
         file.write("".join(data))
 
 
@@ -90,7 +91,9 @@ def add(db):
     phone = check_phone()
     age = check_age()
     email = check_email()
-    contact = [db[-1][0], name, phone, age, email]
+    index = int(db[-1][0]) + 1
+    contact = [index, name, phone, age, email]
+    print(contact)
     db.append(contact)
     write_db(db, filename)
 
